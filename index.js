@@ -19,7 +19,7 @@ const logger = winston.createLogger({
 });
 
 // Function to scrape the website
-async function scrapePetrolOfisi() {
+async function scrapeIzmirGasPrice() {
     try {
         const { data } = await axios.get('https://www.petrolofisi.com.tr/akaryakit-fiyatlari/izmir-akaryakit-fiyatlari');
         const $ = cheerio.load(data);
@@ -40,7 +40,7 @@ async function scrapePetrolOfisi() {
 app.get('/izmir/price', async (req, res) => {
     try {
         // Call the scrape function
-        const data = await scrapePetrolOfisi();
+        const data = await scrapeIzmirGasPrice();
 
         // Log the request details
         const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
