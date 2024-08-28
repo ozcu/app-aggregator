@@ -14,6 +14,11 @@ pipeline {
             }
         }
 
+        stage('Check Workspace Content') {
+            steps {
+                sh 'ls -la ${WORKSPACE}'
+            }
+        }
         stage('Scan Vulnerabilities'){
             steps{
                 sh "docker run -v ${WORKSPACE}:/src --workdir /src returntocorp/semgrep-agent:v1 semgrep-agent --config  p/ci --config p/security-audit --config p/secrets"
